@@ -70,13 +70,13 @@ while True:
                 
                 M1_T1.off()
                 M1_T2.off()
-                M2_T1.on()
-                M2_T2.off()
+                M2_T1.off()
+                M2_T2.on()
                 
             if message=="R1 RIGHT":
                 
-                M1_T1.on()
-                M1_T2.off()
+                M1_T1.off()
+                M1_T2.on()
                 M2_T1.off()
                 M2_T2.off()
             
