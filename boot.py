@@ -6,7 +6,7 @@ def do_connect():
     if not sta_if.isconnected():
         print('connecting to network...')
         sta_if.active(True)
-        sta_if.connect('realme narzo 20A', '579f15d38462')
+        sta_if.connect('', '')
         while not sta_if.isconnected():
             pass
     print('network config:', sta_if.ifconfig())
