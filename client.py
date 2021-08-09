@@ -55,17 +55,22 @@ while True:
     cv.line(frame1,(0,490),(frame1.shape[1],490),(0,225,0),2)#right line(0,490),(1056,490)
     cv.line(frame1,(0,450),(frame1.shape[1],450),(0,0,225),2)
     cv.line(frame1,(290,0),(50,frame1.shape[0]),(0,225,0),2)#end line(290,0),(50,594)
+    cv.line(frame1,(340,0),(100,frame1.shape[0]),(0,0,225),2)
     cv.line(frame1,(290+200,0),(50+400,frame1.shape[0]),(0,225,0),2)#left line(490,0),(450,594)
+    cv.line(frame1,(290+200-50,0),(50+400-50,frame1.shape[0]),(0,0,225),2)
     
     # print(((290,0),(50,frame1.shape[0])))
-    print(((290+200,0),(50+400,frame1.shape[0])))
+    # print(((290+200,0),(50+400,frame1.shape[0])))
 
     contours,_=cv.findContours(dilated,cv.RETR_TREE,cv.CHAIN_APPROX_SIMPLE)
 
     for contour in contours:
         (x,y,w,h)=cv.boundingRect(contour)
-        if cv.contourArea(contour)<1300:
+        
+        if cv.contourArea(contour)<1900 or cv.contourArea(contour)>6000:
             continue
+        print((x,y))
+        # print(cv.contourArea(contour))
         cv.rectangle(frame1,(x,y),(x+w,y+h),(0,255,0),2)
 ####################################################################################################################        
         
@@ -79,7 +84,7 @@ while True:
             c_right_r1+=1
             
         #if robot reaches endline---------->99x +40y=28710
-        if(99*x+40*y==28710):
+        if(99*x+40*y<=28710 and 99*x+40*y>=3360 and c_end_r1==0):
             message="R1 UNLOAD"
             message_header=f"{len(message) :< {HEADER_LENGTH}}"
             final_message=(message_header+message).encode("utf-8")
@@ -87,7 +92,7 @@ while True:
             c_end_r1+=1
 
 #         #if robot reaches left line--------> 297 x + 20 y = 145530
-        if(c_end_r1==1 and 297*x+20*y<=145530):
+        if(c_end_r1==1 and 297*x+20*y>=145530 and 297*x+20*y<=160380):
             message="R1 LEFTb"
             message_header=f"{len(message) :< {HEADER_LENGTH}}"
             final_message=(message_header+message).encode("utf-8")
