@@ -11,7 +11,7 @@ HEADER_LENGTH=10
 
 IP="192.168.43.243"
 PORT=5050
-
+#_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __ 
 my_username="head"
 
 client_socket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -67,7 +67,7 @@ while True:
     for contour in contours:
         (x,y,w,h)=cv.boundingRect(contour)
         
-        if cv.contourArea(contour)<1900 or cv.contourArea(contour)>6000:
+        if cv.contourArea(contour)<1900:
             continue
         print((x,y))
         # print(cv.contourArea(contour))
@@ -91,7 +91,7 @@ while True:
             client_socket.send(final_message)
             c_end_r1+=1
 
-#         #if robot reaches left line--------> 297 x + 20 y = 145530
+        #if robot reaches left line--------> 297 x + 20 y = 145530
         if(c_end_r1==1 and 297*x+20*y>=145530 and 297*x+20*y<=160380):
             message="R1 LEFTb"
             message_header=f"{len(message) :< {HEADER_LENGTH}}"
