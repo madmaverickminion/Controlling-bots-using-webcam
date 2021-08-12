@@ -3,6 +3,7 @@ import select
 import errno
 import sys
 import machine
+import time
 M1_T1=machine.Pin(14,machine.Pin.OUT)
 M1_T2=machine.Pin(12,machine.Pin.OUT)
 M2_T1=machine.Pin(16,machine.Pin.OUT)
@@ -15,6 +16,23 @@ M2_T2.off()
 
 IP="192.168.43.243"
 PORT=5050
+def forward():
+    M1_T1.off()
+    M1_T2.on()
+    M2_T1.off()
+    M2_T2.on()
+
+def backward():
+    M1_T1.on()
+    M1_T2.off()
+    M2_T1.on()
+    M2_T2.off()
+def stop():
+    M1_T1.off()
+    M1_T2.off()
+    M2_T1.off()
+    M2_T2.off()
+
 def f(a,b):
     a = str(a)
     return a + (b-len(a))*' '
@@ -47,24 +65,10 @@ while True:
            
            
             if message =="R1 FORWARD":
-               
-               M1_T1.off()
-               M1_T2.on()
-               M2_T1.off()
-               M2_T2.on()
-               
-            
-            
-               
-                
-                
+                forward()
+
             if message=="R1 BACKWARD":
-                
-                M1_T1.on()
-                M1_T2.off()
-                M2_T1.on()
-                M2_T2.off()
-                
+                backward()
                 
             if message=="R1 LEFT":
                 
@@ -72,19 +76,38 @@ while True:
                 M1_T2.off()
                 M2_T1.off()
                 M2_T2.on()
-                
+                time.sleep(0.35)
+                forward()
+
             if message=="R1 RIGHT":
                 
                 M1_T1.off()
                 M1_T2.on()
                 M2_T1.off()
                 M2_T2.off()
+                time.sleep(0.35)
+                forward()
+
             
             if message=="R1 STOP":
+                stop()
+            if message=="R1 UNLOAD":
+                stop()
+                time.sleep(2)
+                backward()
+            if message=="R1 LEFTb":
                 M1_T1.off()
                 M1_T2.off()
-                M2_T1.off()
+                M2_T1.on()
                 M2_T2.off()
+                time.sleep(0.35)
+                backward()
+
+            if message=="R1 STOP":
+                stop()
+
+
+
                 
     except:
         continue
