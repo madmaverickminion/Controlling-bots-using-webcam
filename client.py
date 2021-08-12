@@ -54,6 +54,9 @@ while True:
     dilated=cv.dilate(thres,None,iterations=3)
     cv.line(frame1,(0,490),(frame1.shape[1],490),(0,225,0),2)#right line(0,490),(1056,490)
     cv.line(frame1,(0,450),(frame1.shape[1],450),(0,0,225),2)
+    
+    cv.line(frame1,(0,70),(frame1.shape[1],70),(0,0,225),2)#start line y=70
+    cv.line(frame1,(0,100),(frame1.shape[1],100),(0,225,0),2)#y=100
     cv.line(frame1,(290,0),(50,frame1.shape[0]),(0,225,0),2)#end line(290,0),(50,594)
     cv.line(frame1,(340,0),(100,frame1.shape[0]),(0,0,225),2)
     cv.line(frame1,(290+200,0),(50+400,frame1.shape[0]),(0,225,0),2)#left line(490,0),(450,594)
@@ -84,7 +87,7 @@ while True:
             c_right_r1+=1
             
         #if robot reaches endline---------->99x +40y=28710
-        if(99*x+40*y<=28710 and 99*x+40*y>=3360 and c_end_r1==0):
+        if(99*x+40*y<=28710 and 99*x+40*y>=3360 and c_end_r1==0 and c_right_r1==1):
             message="R1 UNLOAD"
             message_header=f"{len(message) :< {HEADER_LENGTH}}"
             final_message=(message_header+message).encode("utf-8")
@@ -97,12 +100,18 @@ while True:
             message_header=f"{len(message) :< {HEADER_LENGTH}}"
             final_message=(message_header+message).encode("utf-8")
             client_socket.send(final_message)
+            c_end_r1+=1
+
 #         #if robot reaches back starting point
-#         if():
-#             message="R1 STOP"
-#             message_header=f"{len(message) :< {HEADER_LENGTH}}"
-#             final_message=(message_header+message).encode("utf-8")
-#             client_socket.send(final_message)
+        if(c_end_r1==2 and y>=70 and y<=100):
+            message="R1 STOP"
+            message_header=f"{len(message) :< {HEADER_LENGTH}}"
+            final_message=(message_header+message).encode("utf-8")
+            client_socket.send(final_message)
+            c_end_r1+=1
+            c_start_r1+=1
+
+
 
 # ####################################################################################################################
     cv.imshow('Live Stream',frame1)
