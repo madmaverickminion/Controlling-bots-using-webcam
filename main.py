@@ -8,6 +8,18 @@ M1_T1=machine.Pin(14,machine.Pin.OUT)
 M1_T2=machine.Pin(12,machine.Pin.OUT)
 M2_T1=machine.Pin(16,machine.Pin.OUT)
 M2_T2=machine.Pin(5,machine.Pin.OUT)
+
+en1 =machine.Pin(4,machine.Pin.OUT)
+en2=machine.Pin(13,machine.Pin.OUT)
+
+pwm1=machine.PWM(en1)
+pwm2=machine.PWM(en2)
+
+pwm1.init()
+pwm2.init()
+pwm1.duty(512)
+pwm2.duty(512)
+
 HEADER_LENGTH=10
 M1_T1.off()
 M1_T2.off()
@@ -17,6 +29,7 @@ M2_T2.off()
 IP="192.168.43.243"
 PORT=5050
 def forward():
+
     M1_T1.off()
     M1_T2.on()
     M2_T1.off()
@@ -32,6 +45,8 @@ def stop():
     M1_T2.off()
     M2_T1.off()
     M2_T2.off()
+
+stop()
 
 def f(a,b):
     a = str(a)
@@ -71,7 +86,9 @@ while True:
                 backward()
                 
             if message=="R1 LEFT":
-                
+                stop()
+                time.sleep(1)
+
                 M1_T1.off()
                 M1_T2.off()
                 M2_T1.off()
@@ -80,7 +97,9 @@ while True:
                 forward()
 
             if message=="R1 RIGHT":
-                
+                stop()
+                time.sleep(1)
+
                 M1_T1.off()
                 M1_T2.on()
                 M2_T1.off()
@@ -96,6 +115,9 @@ while True:
                 time.sleep(2)
                 backward()
             if message=="R1 LEFTb":
+                stop()
+                time.sleep(1)
+                
                 M1_T1.off()
                 M1_T2.off()
                 M2_T1.on()
