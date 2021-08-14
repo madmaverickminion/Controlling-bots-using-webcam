@@ -17,8 +17,8 @@ pwm2=machine.PWM(en2)
 
 pwm1.init()
 pwm2.init()
-pwm1.duty(512)
-pwm2.duty(512)
+pwm1.duty(300)
+pwm2.duty(300)
 
 HEADER_LENGTH=10
 M1_T1.off()
@@ -93,7 +93,7 @@ while True:
                 M1_T2.off()
                 M2_T1.off()
                 M2_T2.on()
-                time.sleep(0.35)
+                time.sleep(0.70)
                 forward()
 
             if message=="R1 RIGHT":
@@ -104,7 +104,7 @@ while True:
                 M1_T2.on()
                 M2_T1.off()
                 M2_T2.off()
-                time.sleep(0.35)
+                time.sleep(0.70)
                 forward()
 
             
@@ -116,13 +116,13 @@ while True:
                 backward()
             if message=="R1 LEFTb":
                 stop()
-                time.sleep(1)
+                time.sleep(2)
                 
                 M1_T1.off()
                 M1_T2.off()
                 M2_T1.on()
                 M2_T2.off()
-                time.sleep(0.35)
+                time.sleep(0.70)
                 backward()
 
             if message=="R1 STOP":
