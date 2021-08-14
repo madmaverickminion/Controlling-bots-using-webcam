@@ -80,7 +80,7 @@ while True:
         
         #if robot reaches right line
         if(y<=490 and y>450 and c_right_r1==0):
-            message = "R1 RIGHT"
+            message = "R1 LEFT"
             message_header=f"{len(message) :< {HEADER_LENGTH}}"
             final_message=(message_header+message).encode("utf-8")
             client_socket.send(final_message)
