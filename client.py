@@ -52,8 +52,8 @@ while True:
     blur=cv.GaussianBlur(gray,(7,7),1)
     _,thres=cv.threshold(blur,20,255,cv.THRESH_BINARY)
     dilated=cv.dilate(thres,None,iterations=3)
-    cv.line(frame1,(0,490),(frame1.shape[1],490),(0,225,0),2)#right line(0,490),(1056,490)
-    cv.line(frame1,(0,450),(frame1.shape[1],450),(0,0,225),2)
+    cv.line(frame1,(0,260),(frame1.shape[1],260),(0,225,0),2)#right line(0,490),(1056,490)
+    cv.line(frame1,(0,220),(frame1.shape[1],220),(0,0,225),2)
     
     cv.line(frame1,(0,70),(frame1.shape[1],70),(0,0,225),2)#start line y=70
     cv.line(frame1,(0,100),(frame1.shape[1],100),(0,225,0),2)#y=100
@@ -79,7 +79,7 @@ while True:
         
         
         #if robot reaches right line
-        if(y<=490 and y>450 and c_right_r1==0):
+        if(y<=260 and y>220 and c_right_r1==0):
             message = "R1 LEFT"
             message_header=f"{len(message) :< {HEADER_LENGTH}}"
             final_message=(message_header+message).encode("utf-8")
