@@ -12,3 +12,7 @@ In this project, a four wheeled bot was controlled using an overhead camera. The
 ### Software used
 - IP Webcam app - to live stream the feed directly using android mobile
 
+## Summary
+## Further scope 
+- This project can be very easily scaled to multiple robots. The robot motion can be improved by applying PID control algorithm. The localization of the bot can be improved further using Aruco markers 
+
